@@ -9,3 +9,4 @@ variable region {
   default     = ""
   description = "Google Cloud location of resource"
 }
+
