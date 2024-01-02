@@ -10,8 +10,8 @@ module "bigquery-dataset-gasolina" {
   project_id = var.project_id
   location = var.region
   delete_contents_on_destroy = true
-  deletion_protections = false
-  acess = [
+  deletion_protection = false
+  access = [
     {
       role = "OWNER"
       special_group = "projectOwners"
@@ -78,4 +78,4 @@ module "pyspark-code" {
   name = "pyspark_code_combustivel_525345"
   project_id = var.project_id
   location = var.region
-}
+}   
