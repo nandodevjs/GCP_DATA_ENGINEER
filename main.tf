@@ -1,15 +1,11 @@
-resource "google_storage_bucket" "gcs_bucket" {
-    name = "test-bucket-243r543ew"
-}
-
 module "bigquery-dataset-gasolina" {
-  source = "./modules/bigquery"
-  dataset_id = "GASOLINA_BRASIL"
-  dataset_name = "GASOLINA_BRASIL"
-  description = "Dataset com dados históricos do valor da gasolina no Brasil"
-  project_id = var.project_id
-  location = var.region
-  delete_contents_on_destroy = true
+  source  = "./modules/bigquery"
+  dataset_id                  = "gasolina_brasil"
+  dataset_name                = "gasolina_brasil"
+  description                 = "Dataset a respeito do histórico de preços da Gasolina no Brasil a partir de 2004"
+  project_id                  = var.project_id
+  location                    = var.region
+  delete_contents_on_destroy  = true
   deletion_protection = false
   access = [
     {
@@ -27,55 +23,55 @@ module "bigquery-dataset-gasolina" {
   ]
   tables=[
     {
-      table_id = "tb_historico_combustivel_brasil",
-      description = "Valores dos preços do combustível ao longo dos anos"
-      time_partitioning = {
-        type = "DATA",
-        field = "data",
-        require_partition_filter = false,
-        expiration_ms = null
-      },
-      range_partitioning = null,
-      expiration_time = null,
-      clustering = ["produto","regiao_sigla","estado_sigla"],
-      labels = {
-        name = "ELT_Combustivel"
-        project = "gasolina"
-      },
-      deletion_protections = true
-      schema = file("./bigquery/schema/gasolina_brasil/tb_historico_combustivel_brasil.json")
+        table_id           = "tb_historico_combustivel_brasil",
+        description        = "Tabela com as informacoes de preço do combustível ao longo dos anos"
+        time_partitioning  = {
+          type                     = "DAY",
+          field                    = "data",
+          require_partition_filter = false,
+          expiration_ms            = null
+        },
+        range_partitioning = null,
+        expiration_time = null,
+        clustering      = ["produto","regiao_sigla", "estado_sigla"],
+        labels          = {
+          name    = "stack_data_pipeline"
+          project  = "gasolina"
+        },
+        deletion_protection = true
+        schema = file("./bigquery/schema/gasolina_brasil/tb_historico_combustivel_brasil.json")
     }
   ]
 }
 
 module "bucket-raw" {
-  source = "./modules/gcs"
+  source  = "./modules/gcs"
 
-  name = "raw_combustivel_846152"
+  name       = "raw_combustiveis_brasil"
   project_id = var.project_id
-  location = var.region
+  location   = var.region
 }
 
 module "bucket-curated" {
-  source = "./modules/gcs"
+  source  = "./modules/gcs"
 
-  name = "curated_combustivel_126435"
+  name       = "curated_ombustiveis_brasil"
   project_id = var.project_id
-  location = var.region
+  location   = var.region
 }
 
-module "pyspark-temp" {
-  source = "./modules/gcs"
+module "bucket-pyspark-tmp" {
+  source  = "./modules/gcs"
 
-  name = "pyspark_temp_combustivel_541654"
+  name       = "pyspark_tmp_combustiveis_brasil"
   project_id = var.project_id
-  location = var.region
+  location   = var.region
 }
 
-module "pyspark-code" {
-  source = "./modules/gcs"
+module "bucket-pyspark-code" {
+  source  = "./modules/gcs"
 
-  name = "pyspark_code_combustivel_525345"
+  name       = "pyspark_code_combustiveis_brasil"
   project_id = var.project_id
-  location = var.region
-}   
+  location   = var.region
+}
