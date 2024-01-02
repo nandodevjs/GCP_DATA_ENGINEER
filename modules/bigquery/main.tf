@@ -47,7 +47,7 @@ module "bigquery-dataset-gasolina" {
 module "bucket-raw" {
   source = "./modules/gcs"
 
-  name = "raw_combustivel"
+  name = "raw_combustivel_846152"
   project_id = var.project_id
   location = var.region
 }
@@ -55,7 +55,7 @@ module "bucket-raw" {
 module "bucket-curated" {
   source = "./modules/gcs"
 
-  name = "curated_combustivel"
+  name = "curated_combustivel_126435"
   project_id = var.project_id
   location = var.region
 }
@@ -63,7 +63,7 @@ module "bucket-curated" {
 module "pyspark-temp" {
   source = "./modules/gcs"
 
-  name = "pyspark_temp_combustivel"
+  name = "pyspark_temp_combustivel_541654"
   project_id = var.project_id
   location = var.region
 }
@@ -71,7 +71,7 @@ module "pyspark-temp" {
 module "pyspark-code" {
   source = "./modules/gcs"
 
-  name = "pyspark_code_combustivel"
+  name = "pyspark_code_combustivel_525345"
   project_id = var.project_id
   location = var.region
 }
