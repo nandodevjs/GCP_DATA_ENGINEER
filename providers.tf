@@ -5,7 +5,7 @@ provider "google" {
 
 terraform {
     backend "gcs" {
-      bucket = "state-terraform-01"
+      bucket = "state-terraform-02"
       prefix = "terraform/state"
     }
     required_providers {
