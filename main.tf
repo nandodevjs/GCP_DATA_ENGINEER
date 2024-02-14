@@ -47,7 +47,7 @@ module "bigquery-dataset-gasolina" {
 module "bucket-raw" {
   source  = "./modules/gcs"
 
-  name       = "raw_combustiveis_brasil_"
+  name       = "raw_combustiveis_brasil_6141"
   project_id = var.project_id
   location   = var.region
 }
@@ -55,7 +55,7 @@ module "bucket-raw" {
 module "bucket-curated" {
   source  = "./modules/gcs"
 
-  name       = "curated_ombustiveis_brasil_"
+  name       = "curated_ombustiveis_brasil_36398"
   project_id = var.project_id
   location   = var.region
 }
@@ -63,7 +63,7 @@ module "bucket-curated" {
 module "bucket-pyspark-tmp" {
   source  = "./modules/gcs"
 
-  name       = "pyspark_tmp_combustiveis_brasil_"
+  name       = "pyspark_tmp_combustiveis_brasil_474"
   project_id = var.project_id
   location   = var.region
 }
@@ -71,7 +71,7 @@ module "bucket-pyspark-tmp" {
 module "bucket-pyspark-code" {
   source  = "./modules/gcs"
 
-  name       = "pyspark_code_combustiveis_brasil_"
+  name       = "pyspark_code_combustiveis_brasil_798"
   project_id = var.project_id
   location   = var.region
 }
