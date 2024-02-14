@@ -1,2 +1,2 @@
-project_id = "data-engineer-labs-412901"
+project_id = "data-engineer-labs"
 region = "us-central1"
